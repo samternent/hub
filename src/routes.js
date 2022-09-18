@@ -16,9 +16,8 @@ router.post('/deploy', function (req, res) {
 		return res.status(400).send({
 			message: e,
 		});
-	} finally {
-		res.send('Okta Event hook Successfully received');
 	}
+	res.send('Captain Hook');
 });
 
 module.exports = router;

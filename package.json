@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon main.js",
-		"start": "forever start -c nodemon main.js --exitcrash",
+		"dev": "nodemon src/main.js",
+		"start": "forever start -c nodemon src/main.js --exitcrash",
 		"stop": "forever stopall",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
