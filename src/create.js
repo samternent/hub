@@ -6,9 +6,6 @@ const createSSL = require('./ssl.js');
 module.exports = function (repo, subdomain, domain) {
 	// configure nginx
 	try {
-		exec(`sudo chown -R sam:sam /var/www/${domain}`);
-		exec(`sudo chown -R sam:sam /etc/nginx/sites-available`);
-		exec(`sudo chown -R sam:sam /etc/nginx/sites-enabled`);
 		fs.rmSync(`/var/www/${domain}/html`, { recursive: true, force: true });
 		fs.rmSync(`/etc/nginx/sites-available/${domain}`, {
 			recursive: true,
@@ -20,6 +17,9 @@ module.exports = function (repo, subdomain, domain) {
 		});
 
 		exec(`sudo mkdir -p /var/www/${domain}/html`);
+		exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
+		exec(`sudo chown -R sam:sam /etc/nginx/sites-available`);
+		exec(`sudo chown -R sam:sam /etc/nginx/sites-enabled`);
 
 		function writeFile(path, contents, cb) {
 			fs.mkdir(dirname(path), { recursive: true }, function (err) {
@@ -35,7 +35,7 @@ module.exports = function (repo, subdomain, domain) {
 		cd(`~/${repo.split('/')[1]}`);
 		exec('pnpm i');
 		exec('pnpm build');
-		cp('-R', 'dist/', `/var/www/${domain}/html`);
+		exec(`sudo cp -r dist/ /var/www/${domain}/html/`);
 
 		writeFile(
 			`/etc/nginx/sites-available/${domain}`,
