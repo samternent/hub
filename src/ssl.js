@@ -5,7 +5,7 @@ module.exports = function (subdomain, domain) {
 	const greenlock = Greenlock.create({
 		configDir: './greenlock.d/config.json',
 		packageAgent: pkg.name + '/' + pkg.version,
-		maintainerEmail: pkg.author,
+		maintainerEmail: 'sam.ternent@gmail.com',
 		staging: true,
 		notify: function (event, details) {
 			if ('error' === event) {
