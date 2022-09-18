@@ -32,7 +32,7 @@ server {
   root /var/www/${DOMAIN}/html;
   index index.html index.htm index.nginx-debian.html;
 
-  server_name ${DOMAIN} ${SUBDOMAIN}.${domain};
+  server_name ${DOMAIN} ${SUBDOMAIN}.${DOMAIN};
 
   location / {
     try_files \$uri \$uri/ /index.html;
