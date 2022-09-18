@@ -1,4 +1,4 @@
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 const Greenlock = require('greenlock');
 
 module.exports = function (subdomain, domain) {
