@@ -10,8 +10,15 @@ router.get('/', function (req, res) {
 
 router.post('/deploy', async function (req, res) {
 	try {
-		const { repository, subdomain, domain } = req.body;
-		exec(`bash src/create.sh ${repository} ${subdomain} ${domain}`);
+		const { repository, subdomain, domain, type, port } = req.body;
+		if (type === 'static') {
+			exec(`bash src/create-static.sh ${repository} ${subdomain} ${domain}`);
+		}
+		if (type === 'static') {
+			exec(
+				`bash src/create-server.sh ${repository} ${subdomain} ${domain} ${port}`
+			);
+		}
 	} catch (e) {
 		return res.status(400).send({ message: e });
 	}
