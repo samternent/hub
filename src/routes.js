@@ -9,14 +9,17 @@ router.get('/', function (req, res) {
 });
 
 router.post('/deploy', async function (req, res) {
-	try {
-		const { repository, subdomain, domain } = req.body;
-		createApp(repository, subdomain, domain);
-	} catch (e) {
-		return res.status(400).send({
-			message: e,
+	const create = (repository, subdomain, domain) =>
+		new Promise((resolve, reject) => {
+			try {
+				createApp(repository, subdomain, domain);
+			} catch (e) {
+				reject(e);
+			}
 		});
-	}
+
+	const { repository, subdomain, domain } = req.body;
+	create(repository, subdomain, domain);
 	res.send('Captain Hook');
 });
 
