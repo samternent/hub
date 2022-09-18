@@ -25,7 +25,6 @@ pnpm i
 pnpm build
 
 sudo cp -r dist/* /var/www/${DOMAIN}/html
-sudo sed -e "s/\${domain}/$DOMAIN/" -e "s/\${subdomain}/$SUBDOMAIN/" ./src/nginx.conf ${DOMAIN}
 
 sudo touch /etc/nginx/sites-available/${DOMAIN}
 sudo tee -a /etc/nginx/sites-available/${DOMAIN} > /dev/null <<EOT
