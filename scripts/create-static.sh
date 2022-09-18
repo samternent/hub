@@ -49,3 +49,5 @@ EOT
 sudo ln -s /etc/nginx/sites-available/${DOMAIN} /etc/nginx/sites-enabled/
 
 echo 1 | sudo certbot --nginx -d ${DOMAIN} -d ${SUBDOMAIN}.${DOMAIN}
+
+sudo systemctl restart nginx
