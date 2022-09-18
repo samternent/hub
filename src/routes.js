@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 	res.send('Welcome to the Webhooks API');
 });
 
-router.post('/deploy', function (req, res) {
+router.post('/deploy', async function (req, res) {
 	try {
 		const { repository, subdomain, domain } = req.body;
 		createApp(repository, subdomain, domain);

@@ -2,7 +2,7 @@ const fs = require('fs');
 const { dirname } = require('path');
 const { exec, cd } = require('shelljs');
 
-module.exports = function (repo, subdomain, domain) {
+module.exports = async function (repo, subdomain, domain) {
 	// configure nginx
 	try {
 		exec(`sudo rm -rf /var/www/${domain}/html`);
