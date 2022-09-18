@@ -18,6 +18,7 @@
 	"devDependencies": {
 		"body-parser": "^1.20.0",
 		"forever": "^4.0.3",
+		"greenlock": "^4.0.4",
 		"nodemon": "^2.0.20",
 		"shelljs": "^0.8.5"
 	}

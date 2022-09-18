@@ -4,6 +4,7 @@ specifiers:
   body-parser: ^1.20.0
   express: ^4.18.1
   forever: ^4.0.3
+  greenlock: ^4.0.4
   nodemon: ^2.0.20
   shelljs: ^0.8.5
 
@@ -13,6 +14,7 @@ dependencies:
 devDependencies:
   body-parser: 1.20.0
   forever: 4.0.3
+  greenlock: 4.0.4
   nodemon: 2.0.20
   shelljs: 0.8.5
 
@@ -31,6 +33,93 @@ packages:
       kuler: 2.0.0
     dev: true
 
+  /@greenlock/manager/3.1.0:
+    resolution: {integrity: sha512-PBy5CMK+j4oD7sj7hF5qE+xKEOSiiuL2hHd5X5ttEbtnTSDKjNeqbrR5k2ZddwVNdjOVeBIeuqlm81IFZ+Ftew==}
+    dependencies:
+      greenlock-manager-fs: 3.1.1
+    dev: true
+
+  /@root/acme/3.1.0:
+    resolution: {integrity: sha512-GAyaW63cpSYd2KvVp5lHLbCWeEhJPKZK9nsJvZJOKsD9Uv88KEttn4FpDZEJ+2q3Jsey0DWpuQ2I4ft0JV9p2w==}
+    requiresBuild: true
+    dependencies:
+      '@root/csr': 0.8.1
+      '@root/encoding': 1.0.1
+      '@root/keypairs': 0.10.3
+      '@root/pem': 1.0.4
+      '@root/request': 1.9.1
+      '@root/x509': 0.7.2
+    dev: true
+
+  /@root/asn1/1.0.0:
+    resolution: {integrity: sha512-0lfZNuOULKJDJmdIkP8V9RnbV3XaK6PAHD3swnFy4tZwtlMDzLKoM/dfNad7ut8Hu3r91wy9uK0WA/9zym5mig==}
+    dependencies:
+      '@root/encoding': 1.0.1
+    dev: true
+
+  /@root/csr/0.8.1:
+    resolution: {integrity: sha512-hKl0VuE549TK6SnS2Yn9nRvKbFZXn/oAg+dZJU/tlKl/f/0yRXeuUzf8akg3JjtJq+9E592zDqeXZ7yyrg8fSQ==}
+    dependencies:
+      '@root/asn1': 1.0.0
+      '@root/pem': 1.0.4
+      '@root/x509': 0.7.2
+    dev: true
+
+  /@root/encoding/1.0.1:
+    resolution: {integrity: sha512-OaEub02ufoU038gy6bsNHQOjIn8nUjGiLcaRmJ40IUykneJkIW5fxDqKxQx48cszuNflYldsJLPPXCrGfHs8yQ==}
+    dev: true
+
+  /@root/greenlock/4.0.5:
+    resolution: {integrity: sha512-KR9w3mYE9aH33FCibI8oSYBQV+f7lc3MVPdZ9nxY2tqRLmJp05cMOMz340mtG14VnWDuznLj4TbBj3sHIuoQPQ==}
+    hasBin: true
+    dependencies:
+      '@greenlock/manager': 3.1.0
+      '@root/acme': 3.1.0
+      '@root/csr': 0.8.1
+      '@root/keypairs': 0.10.3
+      '@root/mkdirp': 1.0.0
+      '@root/request': 1.9.1
+      acme-http-01-standalone: 3.0.5
+      cert-info: 1.5.1
+      greenlock-store-fs: 3.2.2
+      safe-replace: 1.1.0
+    dev: true
+
+  /@root/keypairs/0.10.3:
+    resolution: {integrity: sha512-hbmjVbk/G99Z1XlUzJM4VOAaR8jm4vMnfwpZL301FA24ubJ/bOjj6enCrz9gKsQvBO6RY4/R4MgUuWpXeqeZZQ==}
+    dependencies:
+      '@root/encoding': 1.0.1
+      '@root/pem': 1.0.4
+      '@root/x509': 0.7.2
+    dev: true
+
+  /@root/keypairs/0.9.0:
+    resolution: {integrity: sha512-NXE2L9Gv7r3iC4kB/gTPZE1vO9Ox/p14zDzAJ5cGpTpytbWOlWF7QoHSJbtVX4H7mRG/Hp7HR3jWdWdb2xaaXg==}
+    dependencies:
+      '@root/encoding': 1.0.1
+      '@root/pem': 1.0.4
+      '@root/x509': 0.7.2
+    dev: true
+
+  /@root/mkdirp/1.0.0:
+    resolution: {integrity: sha512-hxGAYUx5029VggfG+U9naAhQkoMSXtOeXtbql97m3Hi6/sQSRL/4khKZPyOF6w11glyCOU38WCNLu9nUcSjOfA==}
+    dev: true
+
+  /@root/pem/1.0.4:
+    resolution: {integrity: sha512-rEUDiUsHtild8GfIjFE9wXtcVxeS+ehCJQBwbQQ3IVfORKHK93CFnRtkr69R75lZFjcmKYVc+AXDB+AeRFOULA==}
+    dev: true
+
+  /@root/request/1.9.1:
+    resolution: {integrity: sha512-ROVgS5qgTvXDCI9XoJawJCB+QfC9jF7t3pFWmdUibjHqPt+2wV7pYSgth65qb65bK3qDIv9xXYF5FBECKhe8Iw==}
+    dev: true
+
+  /@root/x509/0.7.2:
+    resolution: {integrity: sha512-ENq3LGYORK5NiMFHEVeNMt+fTXaC7DTS6sQXoqV+dFdfT0vmiL5cDLjaXQhaklJQq0NiwicZegzJRl1ZOTp3WQ==}
+    dependencies:
+      '@root/asn1': 1.0.0
+      '@root/encoding': 1.0.1
+    dev: true
+
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
     dev: true
@@ -42,6 +131,10 @@ packages:
       mime-types: 2.1.35
       negotiator: 0.6.3
     dev: false
+
+  /acme-http-01-standalone/3.0.5:
+    resolution: {integrity: sha512-W4GfK+39GZ+u0mvxRVUcVFCG6gposfzEnSBF20T/NUwWAKG59wQT1dUbS1NixRIAsRuhpGc4Jx659cErFQH0Pg==}
+    dev: true
 
   /anymatch/2.0.0:
     resolution: {integrity: sha512-5teOsQWABXHHBFP9y3skS5P3d/WfWXpv3FUpy+LorMrNYaT9pI4oLMQX7jzQ2KklNpGpWHzdCXTDT2Y3XGlZBw==}
@@ -243,6 +336,11 @@ packages:
 
   /caller/1.1.0:
     resolution: {integrity: sha512-n+21IZC3j06YpCWaxmUy5AnVqhmCIM2bQtqQyy00HJlmStRt6kwDX5F9Z97pqwAB+G/tgSz6q/kUBbNyQzIubw==}
+    dev: true
+
+  /cert-info/1.5.1:
+    resolution: {integrity: sha512-eoQC/yAgW3gKTKxjzyClvi+UzuY97YCjcl+lSqbsGIy7HeGaWxCPOQFivhUYm27hgsBMhsJJFya3kGvK6PMIcQ==}
+    hasBin: true
     dev: true
 
   /chokidar/2.1.8:
@@ -926,6 +1024,36 @@ packages:
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
+    dev: true
+
+  /greenlock-manager-fs/3.1.1:
+    resolution: {integrity: sha512-np6qdnPIOZx40PAcSQcqK1eMPWjTKxsxcgRd/OVg0ai49WC1Ds74CTrwmB84pq2n53ikbnDBQFmKEQ4AC0DK8w==}
+    dependencies:
+      '@root/mkdirp': 1.0.0
+      safe-replace: 1.1.0
+    dev: true
+
+  /greenlock-store-fs/3.2.2:
+    resolution: {integrity: sha512-92ejLB4DyV4qv/2b6VLGF2nKfYQeIfg3o+e/1cIoYLjlIaUFdbBXkzLTRozFlHsQPZt2ALi5qYrpC9IwH7GK8A==}
+    dependencies:
+      '@root/mkdirp': 1.0.0
+      safe-replace: 1.1.0
+    dev: true
+
+  /greenlock/4.0.4:
+    resolution: {integrity: sha512-f96lHXk0DIZCyem4IpMea/ME4LnWUHHSJr79r6UxF//gBRFy9toSq7ndiSO9hL1A2WDZSv+j28kFcbf+/az9Ew==}
+    dependencies:
+      '@greenlock/manager': 3.1.0
+      '@root/acme': 3.1.0
+      '@root/csr': 0.8.1
+      '@root/greenlock': 4.0.5
+      '@root/keypairs': 0.9.0
+      '@root/mkdirp': 1.0.0
+      '@root/request': 1.9.1
+      acme-http-01-standalone: 3.0.5
+      cert-info: 1.5.1
+      greenlock-store-fs: 3.2.2
+      safe-replace: 1.1.0
     dev: true
 
   /has-bigints/1.0.2:
@@ -1895,6 +2023,10 @@ packages:
     resolution: {integrity: sha512-aJXcif4xnaNUzvUuC5gcb46oTS7zvg4jpMTnuqtrEPlR3vFr4pxtdTwaF1Qs3Enjn9HK+ZlwQui+a7z0SywIzg==}
     dependencies:
       ret: 0.1.15
+    dev: true
+
+  /safe-replace/1.1.0:
+    resolution: {integrity: sha512-9/V2E0CDsKs9DWOOwJH7jYpSl9S3N05uyevNjvsnDauBqRowBPOyot1fIvV5N2IuZAbYyvrTXrYFVG0RZInfFw==}
     dev: true
 
   /safe-stable-stringify/2.4.0:
