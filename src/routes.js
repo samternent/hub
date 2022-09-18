@@ -12,11 +12,11 @@ router.post('/deploy', async function (req, res) {
 	try {
 		const { repository, subdomain, domain, type, port } = req.body;
 		if (type === 'static') {
-			exec(`bash src/create-static.sh ${repository} ${subdomain} ${domain}`);
+			exec(`bash ~/src/create-static.sh ${repository} ${subdomain} ${domain}`);
 		}
 		if (type === 'static') {
 			exec(
-				`bash src/create-server.sh ${repository} ${subdomain} ${domain} ${port}`
+				`bash ~/src/create-server.sh ${repository} ${subdomain} ${domain} ${port}`
 			);
 		}
 	} catch (e) {
