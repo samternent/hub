@@ -25,4 +25,23 @@ pnpm i
 pnpm build
 
 sudo cp -r dist/* /var/www/${DOMAIN}/html
-sudo sed -e "s/\${domain}/$DOMAIN/" -e "s/\${subdomain}/$SUBDOMAIN/" src/nginx.conf ${DOMAIN}
+sudo sed -e "s/\${domain}/$DOMAIN/" -e "s/\${subdomain}/$SUBDOMAIN/" ./src/nginx.conf ${DOMAIN}
+
+sudo tee -a /etc/nginx/sites-available/${DOMAIN} > /dev/null <<EOT
+server {
+  root /var/www/${domain}/html;
+  index index.html index.htm index.nginx-debian.html;
+
+  server_name ${domain} ${subdomain}.${domain};
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name ${domain} ${subdomain}.${domain};
+}
+EOT
