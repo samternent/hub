@@ -1,7 +1,6 @@
 const fs = require('fs');
 const { dirname } = require('path');
-const { exec, cd, cp, rm } = require('shelljs');
-const createSSL = require('./ssl.js');
+const { exec, cd } = require('shelljs');
 
 module.exports = function (repo, subdomain, domain) {
 	// configure nginx
@@ -59,8 +58,7 @@ module.exports = function (repo, subdomain, domain) {
 		exec(
 			`sudo ln -s /etc/nginx/sites-available/${domain} /etc/nginx/sites-enabled/`
 		);
-
-		createSSL(subdomain, domain);
+		exec(`sudo certbot --nginx -d ${domain} -d ${subdomain}.${domain}`);
 	} catch (e) {
 		console.log(e);
 	}
