@@ -21,7 +21,7 @@ module.exports = function (repo, subdomain, domain) {
 	cd(`~/`);
 	exec(`gh repo clone ${repo} ${repo}`);
 	cd(`~/${repo}`);
-	cd('pnpm build');
+	exec('pnpm build');
 	exec(`sudo ln -s ./dist /var/www/${domain}/html`);
 
 	writeFile(
