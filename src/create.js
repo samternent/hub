@@ -1,7 +1,7 @@
 const { writeFile } = require('fs');
 const { exec } = require('shelljs');
 
-const domain = 'ternent.dev';
+const domain = 'teamconcords.com';
 const subdomain = 'www';
 
 // configure nginx
