@@ -58,7 +58,7 @@ module.exports = async function (repo, subdomain, domain) {
 		exec(
 			`sudo ln -s /etc/nginx/sites-available/${domain} /etc/nginx/sites-enabled/`
 		);
-		exec(`sudo certbot --nginx -d ${domain} -d ${subdomain}.${domain}`);
+		// exec(`sudo certbot --nginx -d ${domain} -d ${subdomain}.${domain}`);
 	} catch (e) {
 		console.log(e);
 	}
