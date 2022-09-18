@@ -1,0 +1,23 @@
+{
+	"name": "hub",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon main.js",
+		"start": "forever start -c nodemon main.js --exitcrash",
+		"stop": "forever stopall",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.18.1"
+	},
+	"devDependencies": {
+		"body-parser": "^1.20.0",
+		"forever": "^4.0.3",
+		"nodemon": "^2.0.20"
+	}
+}
