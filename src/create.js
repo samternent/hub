@@ -5,9 +5,15 @@ const createSSL = require('./ssl.js');
 
 module.exports = function (repo, subdomain, domain) {
 	// configure nginx
-	rm('-rf', `/var/www/${domain}/html`);
-	rm('-rf', `/etc/nginx/sites-available/${domain}`);
-	rm('-rf', `/etc/nginx/sites-enabled/${domain}`);
+	fs.rmSync(`/var/www/${domain}/html`, { recursive: true, force: true });
+	fs.rmSync(`/etc/nginx/sites-available/${domain}`, {
+		recursive: true,
+		force: true,
+	});
+	fs.rmSync(`/etc/nginx/sites-enabled/${domain}`, {
+		recursive: true,
+		force: true,
+	});
 
 	exec(`sudo mkdir -p /var/www/${domain}/html`);
 	exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
@@ -28,7 +34,6 @@ module.exports = function (repo, subdomain, domain) {
 	cd(`~/${repo.split('/')[1]}`);
 	exec('pnpm i');
 	exec('pnpm build');
-	rm('-rf', `/var/www/${domain}/html`);
 	cp('-R', 'dist/', `/var/www/${domain}/html`);
 
 	writeFile(
