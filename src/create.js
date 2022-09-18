@@ -6,15 +6,9 @@ const createSSL = require('./ssl.js');
 module.exports = function (repo, subdomain, domain) {
 	// configure nginx
 	try {
-		fs.rmSync(`/var/www/${domain}/html`, { recursive: true, force: true });
-		fs.rmSync(`/etc/nginx/sites-available/${domain}`, {
-			recursive: true,
-			force: true,
-		});
-		fs.rmSync(`/etc/nginx/sites-enabled/${domain}`, {
-			recursive: true,
-			force: true,
-		});
+		exec(`sudo rm -rf /var/www/${domain}/html`);
+		exec(`sudo rm -rf /etc/nginx/sites-available/${domain}`);
+		exec(`sudo rm -rf /etc/nginx/sites-enabled/${domain}`);
 
 		exec(`sudo mkdir -p /var/www/${domain}/html`);
 		exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
