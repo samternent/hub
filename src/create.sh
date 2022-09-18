@@ -4,9 +4,9 @@ REPOSITORY="concords/teamconcords"
 SUBDOMAIN="www"
 DOMAIN="teamconcords.com"
 
-chown -R sam:sam /var/www/${DOMAIN}/html
-chown -R sam:sam /etc/nginx/sites-available
-chown -R sam:sam /etc/nginx/sites-enabled
+sudo chown -R sam:sam /var/www/${DOMAIN}/html
+sudo chown -R sam:sam /etc/nginx/sites-available
+sudo chown -R sam:sam /etc/nginx/sites-enabled
 
 sudo rm -rf /var/www/${DOMAIN}/html
 sudo rm -rf /etc/nginx/sites-available/${DOMAIN}
@@ -25,4 +25,4 @@ pnpm i
 pnpm build
 
 sudo cp -r dist/* /var/www/${DOMAIN}/html
-sudo sed -e "s/\${domain}/$DOMAIN/" -e "s/\${subdomain}/$SUBDOMAIN/" nginx.conf
+sudo sed -e "s/\${domain}/$DOMAIN/" -e "s/\${subdomain}/$SUBDOMAIN/" src/nginx.conf ${DOMAIN}
