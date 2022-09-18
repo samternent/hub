@@ -28,7 +28,7 @@ module.exports = async function (repo, subdomain, domain) {
 		cd(`~/${repo.split('/')[1]}`);
 		exec('pnpm i');
 		exec('pnpm build');
-		exec(`sudo cp -r dist/ /var/www/${domain}/html/`);
+		exec(`sudo cp -r dist/* /var/www/${domain}/html`);
 
 		writeFile(
 			`/etc/nginx/sites-available/${domain}`,
