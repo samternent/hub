@@ -24,7 +24,7 @@ module.exports = function (repo, subdomain, domain) {
 		}
 
 		cd(`~/`);
-		rm('-rf', `/${repo.split('/')[1]}`);
+		exec(`rm -rf /${repo.split('/')[1]}`);
 		exec(`gh repo clone ${repo}`);
 		cd(`~/${repo.split('/')[1]}`);
 		exec('pnpm i');
