@@ -1,10 +1,14 @@
 const fs = require('fs');
 const { dirname } = require('path');
-const { exec, cd } = require('shelljs');
+const { exec, cd, cp, rm } = require('shelljs');
 const createSSL = require('./ssl.js');
 
 module.exports = function (repo, subdomain, domain) {
 	// configure nginx
+	rm('-rf', `/var/www/${domain}/html`);
+	rm('-rf', `/etc/nginx/sites-available/${domain}`);
+	rm('-rf', `/etc/nginx/sites-enabled/${domain}`);
+
 	exec(`sudo mkdir -p /var/www/${domain}/html`);
 	exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
 	exec(`sudo chown -R sam:sam /etc/nginx/sites-available`);
@@ -23,7 +27,8 @@ module.exports = function (repo, subdomain, domain) {
 	cd(`~/${repo.split('/')[1]}`);
 	exec('pnpm i');
 	exec('pnpm build');
-	exec(`sudo ln -s ./dist /var/www/${domain}/html`);
+	rm('-rf', `/var/www/${domain}/html`);
+	cp('-R', 'dist/', `/var/www/${domain}/html`);
 
 	writeFile(
 		`/etc/nginx/sites-available/${domain}`,
