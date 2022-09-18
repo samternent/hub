@@ -14,7 +14,7 @@ router.post('/deploy', async function (req, res) {
 		if (type === 'static') {
 			exec(`bash ~/create-static.sh ${repository} ${subdomain} ${domain}`);
 		}
-		if (type === 'static') {
+		if (type === 'server') {
 			exec(
 				`bash ~/create-server.sh ${repository} ${subdomain} ${domain} ${port}`
 			);
