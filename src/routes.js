@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const createApp = require('./create.js');
+const { exec } = require('shelljs');
 
 const router = express.Router();
 
@@ -9,18 +9,13 @@ router.get('/', function (req, res) {
 });
 
 router.post('/deploy', async function (req, res) {
-	const create = (repository, subdomain, domain) =>
-		new Promise((resolve, reject) => {
-			try {
-				createApp(repository, subdomain, domain);
-			} catch (e) {
-				reject(e);
-			}
-		});
-
-	const { repository, subdomain, domain } = req.body;
-	create(repository, subdomain, domain);
-	res.send('Captain Hook');
+	try {
+		const { repository, subdomain, domain } = req.body;
+		exec(`bash src/create.sh ${repository} ${subdomain} ${domain}`);
+	} catch (e) {
+		return res.status(400).send({ message: e });
+	}
+	return res.send('Captain Hook');
 });
 
 router.post('/create', function (req, res) {
