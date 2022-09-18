@@ -1,43 +1,32 @@
 const fs = require('fs');
 const { dirname } = require('path');
-const { exec } = require('shelljs');
+const { exec, cd } = require('shelljs');
+const createSSL = require('./ssl.js');
 
-const domain = 'teamconcords.com';
-const subdomain = 'www';
+module.exports = function (repo, subdomain, domain) {
+	// configure nginx
+	exec(`sudo mkdir -p /var/www/${domain}/html`);
+	exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
+	exec(`sudo chown -R sam:sam /etc/nginx/sites-available`);
+	exec(`sudo chown -R sam:sam /etc/nginx/sites-enabled`);
 
-// configure nginx
-exec(`sudo mkdir -p /var/www/${domain}/html`);
-exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
-exec(`sudo chown -R sam:sam /etc/nginx/sites-available`);
-exec(`sudo chown -R sam:sam /etc/nginx/sites-enabled`);
+	function writeFile(path, contents, cb) {
+		fs.mkdir(dirname(path), { recursive: true }, function (err) {
+			if (err) return cb(err);
 
-function writeFile(path, contents, cb) {
-	fs.mkdir(dirname(path), { recursive: true }, function (err) {
-		if (err) return cb(err);
-
-		fs.writeFile(path, contents, cb);
-	});
-}
-const createStream = writeFile(
-	`/var/www/${domain}/html/index.html`,
-	`
-<html>
-    <head>
-        <title>Welcome to ${subdomain}.${domain}!</title>
-    </head>
-    <body>
-        <h1>Success! The ${subdomain}.${domain} server block is working!</h1>
-    </body>
-</html>
-`,
-	(e) => {
-		console.log(e);
+			fs.writeFile(path, contents, cb);
+		});
 	}
-);
 
-writeFile(
-	`/etc/nginx/sites-available/${domain}`,
-	`
+	cd(`~/`);
+	exec(`gh repo clone ${repo} ${repo}`);
+	cd(`~/${repo}`);
+	cd('pnpm build');
+	exec(`sudo ln -s ./dist /var/www/${domain}/html`);
+
+	writeFile(
+		`/etc/nginx/sites-available/${domain}`,
+		`
 server {
   root /var/www/${domain}/html;
   index index.html index.htm index.nginx-debian.html;
@@ -55,12 +44,14 @@ server {
   server_name ${domain} ${subdomain}.${domain};
 }
 `,
-	(e) => {
-		console.log(e);
-	}
-);
+		(e) => {
+			console.log(e);
+		}
+	);
 
-exec(
-	`sudo ln -s /etc/nginx/sites-available/${domain} /etc/nginx/sites-enabled/`
-);
-exec(`sudo certbot --nginx -d ${domain} -d ${subdomain}.${domain}`);
+	exec(
+		`sudo ln -s /etc/nginx/sites-available/${domain} /etc/nginx/sites-enabled/`
+	);
+
+	createSSL(subdomain, domain);
+};
