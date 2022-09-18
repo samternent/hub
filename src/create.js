@@ -20,7 +20,7 @@ module.exports = function (repo, subdomain, domain) {
 
 	cd(`~/`);
 	exec(`gh repo clone ${repo}`);
-	cd(`~/${repo.split('/'[1])}`);
+	cd(`~/${repo.split('/')[1]}`);
 	exec('pnpm i');
 	exec('pnpm build');
 	exec(`sudo ln -s ./dist /var/www/${domain}/html`);
