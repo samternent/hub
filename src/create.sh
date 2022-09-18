@@ -46,4 +46,4 @@ server {
 }
 EOT
 
-sudo certbot --nginx -d ${domain} -d ${subdomain}.${domain}
+sudo certbot --nginx -d ${DOMAIN} -d ${SUBDOMAIN}.${DOMAIN}
