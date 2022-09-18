@@ -8,6 +8,8 @@ const subdomain = 'www';
 // configure nginx
 exec(`sudo mkdir -p /var/www/${domain}/html`);
 exec(`sudo chown -R sam:sam /var/www/${domain}/html`);
+exec(`sudo chown -R sam:sam /etc/nginx/sites-available`);
+exec(`sudo chown -R sam:sam /etc/nginx/sites-enabled`);
 
 function writeFile(path, contents, cb) {
 	fs.mkdir(dirname(path), { recursive: true }, function (err) {
