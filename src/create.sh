@@ -1,8 +1,8 @@
 #!/bash/bash
 
-REPOSITORY="concords/teamconcords"
-SUBDOMAIN="www"
-DOMAIN="teamconcords.com"
+REPOSITORY="$1"
+SUBDOMAIN="$2"
+DOMAIN="$3"
 
 sudo chown -R sam:sam /var/www/${DOMAIN}/html
 sudo chown -R sam:sam /etc/nginx/sites-available
@@ -29,19 +29,21 @@ sudo cp -r dist/* /var/www/${DOMAIN}/html
 sudo touch /etc/nginx/sites-available/${DOMAIN}
 sudo tee -a /etc/nginx/sites-available/${DOMAIN} > /dev/null <<EOT
 server {
-  root /var/www/${domain}/html;
+  root /var/www/${DOMAIN}/html;
   index index.html index.htm index.nginx-debian.html;
 
-  server_name ${domain} ${subdomain}.${domain};
+  server_name ${DOMAIN} ${SUBDOMAIN}.${domain};
 
   location / {
-    try_files $uri $uri/ /index.html;
+    try_files \$uri \$uri/ /index.html;
   }
 }
 server {
   listen 80;
   listen [::]:80;
 
-  server_name ${domain} ${subdomain}.${domain};
+  server_name ${DOMAIN} ${SUBDOMAIN}.${DOMAIN};
 }
 EOT
+
+sudo certbot --nginx -d ${domain} -d ${subdomain}.${domain}
